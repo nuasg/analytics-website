@@ -1,39 +1,32 @@
 $(function () {
-  $('#container').highcharts({
+  $('.container').highcharts({
     chart: {
-      type: 'bar'
+      type: 'column'
     },
     title: {
-      text: 'Historic World Population by Region'
-    },
-    subtitle: {
-      text: 'Source: <a href="https://en.wikipedia.org/wiki/World_population">Wikipedia.org</a>'
+      text: 'What school are you currently enrolled in?'
     },
     xAxis: {
-      categories: ['Africa', 'America', 'Asia', 'Europe', 'Oceania'],
-      title: {
-        text: null
-      }
+      categories: ['Weinberg College of Arts and Sciences',
+                   'McCormick School of Engineering and Applied Sciences',
+                   'Medill School of Journalism',
+                   'School of Communication',
+                   'School of Education and Social Policy',
+                   'Bienen School of Music'],
     },
     yAxis: {
       min: 0,
+      max: 100,
       title: {
-        text: 'Population (millions)',
-        align: 'high'
+        text: 'Percent',
+        align: 'middle'
       },
       labels: {
         overflow: 'justify'
       }
     },
     tooltip: {
-      valueSuffix: ' millions'
-    },
-    plotOptions: {
-      bar: {
-        dataLabels: {
-          enabled: true
-        }
-      }
+      pointFormat: '<span style="color:{point.color}">\u25CF</span> {series.name}: <b>{point.y:.1f}%</b><br/>',
     },
     legend: {
       layout: 'vertical',
@@ -50,14 +43,8 @@ $(function () {
       enabled: false
     },
     series: [{
-      name: 'Year 1800',
-      data: [107, 31, 635, 203, 2]
-    }, {
-      name: 'Year 1900',
-      data: [133, 156, 947, 408, 6]
-    }, {
-      name: 'Year 2012',
-      data: [1052, 954, 4250, 740, 38]
+      name: '2014-2015',
+      data: [50.6, 22.0, 10.2, 12.5, 6.0, 3.6]
     }]
   });
 });
