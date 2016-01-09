@@ -1,258 +1,89 @@
 $(function () {
-  $('#graph1').highcharts({
-    chart: {
-      type: 'column'
-    },
-    title: {
-      text: 'What school are you currently enrolled in?'
-    },
-    xAxis: {
-      categories: ['Weinberg College of Arts and Sciences',
-                   'McCormick School of Engineering and Applied Sciences',
-                   'Medill School of Journalism',
-                   'School of Communication',
-                   'School of Education and Social Policy',
-                   'Bienen School of Music'],
-    },
-    yAxis: {
-      min: 0,
-      max: 100,
-      title: {
-        text: 'Percent',
-        align: 'middle'
-      },
-      labels: {
-        overflow: 'justify'
-      }
-    },
-    tooltip: {
-      pointFormat: '<span style="color:{point.color}">\u25CF</span> {series.name}: <b>{point.y:.1f}%</b><br/>',
-    },
-    legend: {
-      layout: 'vertical',
-      align: 'right',
-      verticalAlign: 'top',
-      x: -40,
-      y: 80,
-      floating: true,
-      borderWidth: 1,
-      backgroundColor: ((Highcharts.theme && Highcharts.theme.legendBackgroundColor) || '#FFFFFF'),
-      shadow: true
-    },
-    credits: {
-      enabled: false
-    },
-    series: [{
-      name: '2014-2015',
-      data: [50.6, 22.0, 10.2, 12.5, 6.0, 3.6]
-    }]
-  });
+  for (var i = 0; i < data.length; i++) {
+    var graphid = "graph" + i+1;
+    var div = document.createElement("div");
+    div.id = graphid;
+    div.className = "container graph";
+    document.body.appendChild(div);
 
-  $('#graph4').highcharts({
-    chart: {
-      type: 'column'
-    },
-    title: {
-      text: 'What is your major in McCormick?'
-    },
-    xAxis: {
-      categories: ['Biomedical Engineering',
-                   'Chemical and Biological Engineering',
-                   'Civil and Environmental Engineering',
-                   'Electrical Engineering and Computer Science',
-                   'Engineering Sciences and Applied Mathematics',
-                   'Industrial Engineering and Management Sciences',
-                   'Material Science and Engineering',
-                   'Mechanical Engineering',
-                   'Undeclared'],
-    },
-    yAxis: {
-      min: 0,
-      max: 25,
-      title: {
-        text: 'Percent',
-        align: 'middle'
-      },
-      labels: {
-        overflow: 'justify'
+    type = data[i].type;
+    var qText = data[i].text;
+    var qCategories = [];
+    var qData = [];
+    for (var j = 0; j < data[i].responses.length; j++) {
+        qCategories.push(data[i].responses[j].text);
+    }
+    for (var j = 0; j < data[i].responses.length; j++) {
+        qData.push(data[i].responses[j].bar);
+    }
+    if (type == "Multiple Choice") {
+      $('#'+graphid).highcharts({
+          chart: {
+              type: 'column'
+          },
+          title: {
+              text: qText
+          },
+          xAxis: {
+              categories: qCategories
+          },
+          yAxis: {
+              min: 0,
+              max: 100,
+              title: {
+                  text: 'Percent',
+                  align: 'middle'
+              },
+              labels: {
+                  overflow: 'justify'
+              }
+          },
+          tooltip: {
+              pointFormat: '<span style="color:{point.color}">\u25CF</span> {series.name}: <b>{point.y:.1f}%</b><br/>',
+          },
+          legend: {
+              layout: 'vertical',
+              align: 'right',
+              verticalAlign: 'top',
+              x: -40,
+              y: 80,
+              floating: true,
+              borderWidth: 1,
+              backgroundColor: ((Highcharts.theme && Highcharts.theme.legendBackgroundColor) || '#FFFFFF'),
+              shadow: true
+          },
+          credits: {
+              enabled: false
+          },
+          series: [{
+              name: '2014-2015',
+              data: qData 
+          }]
+      });
+    }
+    else if ((type == "Preference") || (type == "Rank")) {
+      qSeries = []
+      for (var j = 0; j < data[i].responses[0].choices.length; j++) {
+        var obj = {};
+        obj.name = data[i].responses[0].choices[j].choice;
+        obj.data = [];
+        qSeries.push(obj);
       }
-    },
-    tooltip: {
-      pointFormat: '<span style="color:{point.color}">\u25CF</span> {series.name}: <b>{point.y:.1f}%</b><br/>',
-    },
-    legend: {
-      layout: 'vertical',
-      align: 'right',
-      verticalAlign: 'top',
-      x: -40,
-      y: 40,
-      floating: true,
-      borderWidth: 1,
-      backgroundColor: ((Highcharts.theme && Highcharts.theme.legendBackgroundColor) || '#FFFFFF'),
-      shadow: true
-    },
-    credits: {
-      enabled: false
-    },
-    series: [{
-      name: '2014-2015',
-      data: [12.5, 10.4, 7.3, 19.4, 2.4, 15.1, 7.6, 20.8, 4.5]
-    }]
-  });
-  $('#graph6').highcharts({
-    chart: {
-      type: 'column'
-    },
-    title: {
-      text: 'What is your motivation for picking your major? Pick the three most important factors influencing your decision.'
-    },
-    xAxis: {
-      categories: ['Desirable GPA',
-                   'Prestige of Major(s)',
-                   'Future Salary',
-                   'Career Direction',
-                   'Number of Credits Transferable',
-                   'Subject Interest',
-                   'Previous Connections with Professors',
-                   'Others\' Recommendation'],
-    },
-    yAxis: {
-      min: 0,
-      max: 100,
-      title: {
-        text: 'Percent',
-        align: 'middle'
-      },
-      labels: {
-        overflow: 'justify'
+      for (var j = 0; j < data[i].responses.length; j++) {
+        for (var k = 0; k < qSeries.length; k++) {
+          qSeries[k].data.push(data[i].responses[j].choices[k].bar);
+        }
       }
-    },
-    tooltip: {
-      pointFormat: '<span style="color:{point.color}">\u25CF</span> {series.name}: <b>{point.y:.1f}%</b><br/>',
-    },
-    legend: {
-      layout: 'vertical',
-      align: 'right',
-      verticalAlign: 'top',
-      x: -40,
-      y: 80,
-      floating: true,
-      borderWidth: 1,
-      backgroundColor: ((Highcharts.theme && Highcharts.theme.legendBackgroundColor) || '#FFFFFF'),
-      shadow: true
-    },
-    credits: {
-      enabled: false
-    },
-    series: [{
-      name: '2014-2015',
-      data: [7.6, 26.5, 27.2, 77.5, 2.5, 89.5, 6.0, 13.3]
-    }]
-  });
-  $('#graph8').highcharts({
-    chart: {
-      type: 'column'
-    },
-    title: {
-      text: 'Are you an international student?'
-    },
-    xAxis: {
-      categories: ['Yes',
-                   'No',
-                   'I don\'t know'],
-    },
-    yAxis: {
-      min: 0,
-      max: 100,
-      title: {
-        text: 'Percent',
-        align: 'middle'
-      },
-      labels: {
-        overflow: 'justify'
-      }
-    },
-    tooltip: {
-      pointFormat: '<span style="color:{point.color}">\u25CF</span> {series.name}: <b>{point.y:.1f}%</b><br/>',
-    },
-    legend: {
-      layout: 'vertical',
-      align: 'right',
-      verticalAlign: 'top',
-      x: -40,
-      y: 80,
-      floating: true,
-      borderWidth: 1,
-      backgroundColor: ((Highcharts.theme && Highcharts.theme.legendBackgroundColor) || '#FFFFFF'),
-      shadow: true
-    },
-    credits: {
-      enabled: false
-    },
-    series: [{
-      name: '2014-2015',
-      data: [4.9, 94.3, 7.2]
-    }]
-  });
-  $('#graph9').highcharts({
-    chart: {
-      type: 'column'
-    },
-    title: {
-      text: 'Do you receive need-based financial aid from Northwestern?'
-    },
-    xAxis: {
-      categories: ['Yes',
-                   'No',
-                   'Prefer not to respond'],
-    },
-    yAxis: {
-      min: 0,
-      max: 100,
-      title: {
-        text: 'Percent',
-        align: 'middle'
-      },
-      labels: {
-        overflow: 'justify'
-      }
-    },
-    tooltip: {
-      pointFormat: '<span style="color:{point.color}">\u25CF</span> {series.name}: <b>{point.y:.1f}%</b><br/>',
-    },
-    legend: {
-      layout: 'vertical',
-      align: 'right',
-      verticalAlign: 'top',
-      x: -40,
-      y: 80,
-      floating: true,
-      borderWidth: 1,
-      backgroundColor: ((Highcharts.theme && Highcharts.theme.legendBackgroundColor) || '#FFFFFF'),
-      shadow: true
-    },
-    credits: {
-      enabled: false
-    },
-    series: [{
-      name: '2014-2015',
-      data: [49.3, 47.6, 3.1]
-    }]
-  });
-  $('#graph14').highcharts({
+
+      $('#'+graphid).highcharts({
         chart: {
             type: 'column'
         },
         title: {
-            text: 'How important are the following aspects of CTECs to you when making class registration decisions?'
+            text: qText
         },
         xAxis: {
-            categories: [
-                'Composite score',
-                'Time survey question (number of hours per week)',
-                'Free response question (general class impression question)',
-                'Demographic questions (year in school, etc)'
-            ],
+            categories: qCategories,
             crosshair: true
         },
         yAxis: {
@@ -279,25 +110,8 @@ $(function () {
                 borderWidth: 0
             }
         },
-        series: [{
-            name: 'Not at all important',
-            data: [1.2, 3.1, 0.7, 20.7]
-
-        }, {
-            name: 'Slightly unimportant',
-            data: [3.4, 11.5, 1.5, 25.9]
-
-        }, {
-            name: 'Neither Important nor Unimportant',
-            data: [3.6, 15.6, 3.4, 24.8]
-
-        }, {
-            name: 'Slightly Important',
-            data: [43.5, 43.4, 32.8, 24.7]
-
-        }, {
-            name: 'Extremely Important',
-            data: [48.3, 26.4, 61.7, 3.9]
-        }]
-    });
+        series: qSeries
+      });
+    }
+  }
 });
