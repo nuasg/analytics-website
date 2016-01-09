@@ -7,7 +7,7 @@ $(function () {
     document.body.appendChild(div);
 
     type = data[i].type;
-    var qText = data[i].text;
+    var qText = data[i].text.replace("&nbsp;", " ");
     var qCategories = [];
     var qData = [];
     for (var j = 0; j < data[i].responses.length; j++) {
