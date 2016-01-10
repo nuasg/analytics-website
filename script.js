@@ -3,7 +3,7 @@ $(function () {
     var graphid = "graph" + i+1;
     var div = document.createElement("div");
     div.id = graphid;
-    div.className = "container graph";
+    div.className = "graph";
     document.body.appendChild(div);
 
     type = data[i].type;
@@ -29,7 +29,6 @@ $(function () {
           },
           yAxis: {
               min: 0,
-              max: 100,
               title: {
                   text: 'Percent',
                   align: 'middle'
@@ -57,7 +56,7 @@ $(function () {
           },
           series: [{
               name: '2014-2015',
-              data: qData 
+              data: qData
           }]
       });
     }
