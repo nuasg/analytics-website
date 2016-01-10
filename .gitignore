@@ -22,5 +22,7 @@ Network Trash Folder
 Temporary Items
 .apdisk
 
-#### data
-*.json
+
+# Don't upload raw data yet
+data.json
+data.js
