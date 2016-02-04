@@ -6,14 +6,13 @@ $(function () {
     div.className = "container graph";
     document.body.appendChild(div);
 
-    type = data[i].type;
+    var type = data[i].type;    // var
     var qText = data[i].text.replace("&nbsp;", " ");
     var qCategories = [];
     var qData = [];
     for (var j = 0; j < data[i].responses.length; j++) {
+        // why not combine two loops into one?
         qCategories.push(data[i].responses[j].text);
-    }
-    for (var j = 0; j < data[i].responses.length; j++) {
         qData.push(data[i].responses[j].bar);
     }
     if (type == "Multiple Choice") {
@@ -57,19 +56,24 @@ $(function () {
           },
           series: [{
               name: '2014-2015',
-              data: qData 
+              data: qData
           }]
       });
     }
     else if ((type == "Preference") || (type == "Rank")) {
-      qSeries = []
-      for (var j = 0; j < data[i].responses[0].choices.length; j++) {
+      qSeries = [];
+
+      // add some comments here to make it easier to understand
+      // push choice options to qSeries
+      for (j = 0; j < data[i].responses[0].choices.length; j++) {
         var obj = {};
         obj.name = data[i].responses[0].choices[j].choice;
         obj.data = [];
         qSeries.push(obj);
       }
-      for (var j = 0; j < data[i].responses.length; j++) {
+
+      // push response data for each sub-question for the choices
+      for (j = 0; j < data[i].responses.length; j++) {
         for (var k = 0; k < qSeries.length; k++) {
           qSeries[k].data.push(data[i].responses[j].choices[k].bar);
         }

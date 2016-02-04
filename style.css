@@ -5,9 +5,10 @@
   box-shadow: 2px 2px 2px 0px #808080;
 }
 
+/* mind your whitespace */
 .graph {
-	min-width: 310px; 
-	max-width: 800px; 
-	height: 400px; 
-	margin: 0 auto;
+	min-width: 310px;
+	max-width: 800px;
+	height: 400px;
+	margin: 0 auto;x
 }
