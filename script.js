@@ -4,7 +4,7 @@ $(function () {
     var div = document.createElement("div");
     div.id = graphid;
     div.className = "graph";
-    document.body.appendChild(div);
+    $('.graphs').append(div);
 
     type = data[i].type;
     var qText = data[i].text.replace("&nbsp;", " ");
