@@ -1,26 +1,30 @@
 $(function () {
-    
-for (var i = 0; i < data.length; i++) {
-    var graphid = "graph" + i+1;    // id for the chart container
-    var qText = data[i].text        // question text
-    var qCategories = [];           // array of responses
-    var qData = [];                 // array of data
+
+// *** whitespace and semicolons-install a linter! ***
+for (var i = 0; i < data.length; i++) {                 // *** indent your comments to the same line! ***
+    var graphid = "graph" + i+1;                        // id for the chart container
+    var qText = data[i].text;                           // question text
+    var qCategories = [];                               // array of responses
+    var qData = [];                                     // array of data
     for (var j = 0; j < data[i].responses.length; j++) {
         qCategories.push(data[i].responses[j].text);    // populate array of responses
-    }
-    for (var j = 0; j < data[i].responses.length; j++) {
-        qData.push(data[i].responses[j].bar);     // populate array of data
-    }
-    
-    var div = index.createElement("div");   // create div for index.html
-    div.id = graphid;                       // populate div
-    div.class = "container";
-    div.style.minWidth = "400px";
-    div.style.maxWidth = "800px";
-    div.style.height = "400px";
-    div.style.margin = "0 auto";
-    index.body.appendChild(div);
-    
+        qData.push(data[i].responses[j].bar);           // populate array of data
+    }                                                   // *** don't separate your for loops! ***
+
+    var div = document.createElement("div");            // create div for index.html *** it's document, not index ***
+    div.id = graphid;                                   // populate div
+    div.className = "container graph";                  // *** className (not class) is how you change the div class ***
+
+    // *** use your own CSS property for styles (container is used by bootstrap) ^^^
+
+    // *** move this to CSS! ***
+    // div.style.minWidth = "400px";
+    // div.style.maxWidth = "800px";
+    // div.style.height = "400px";
+    // div.style.margin = "0 auto";
+
+    document.body.appendChild(div);                     // *** document not index (this is what broke) ***
+
     $('#'+graphid).highcharts({
         chart: {
             type: 'column'
@@ -61,13 +65,13 @@ for (var i = 0; i < data.length; i++) {
         },
         series: [{
             name: '2014-2015',
-            data: qData 
+            data: qData
         }]
     });
 }
-    
-    
-    
+
+
+
   $('#graph1').highcharts({
     chart: {
       type: 'column'
@@ -116,8 +120,8 @@ for (var i = 0; i < data.length; i++) {
       data: [50.6, 22.0, 10.2, 12.5, 6.0, 3.6]
     }]
   });
-    
-    
+
+
   $('#graph2').highcharts({
     chart: {
       type: 'column'
@@ -126,10 +130,10 @@ for (var i = 0; i < data.length; i++) {
       text: 'What year are you?'
     },
     xAxis: {
-      categories: ['Freshman', 
-                   'Sophomore', 
-                   'Junior', 
-                   'Senior', 
+      categories: ['Freshman',
+                   'Sophomore',
+                   'Junior',
+                   'Senior',
                    'Fifth year student'],
     },
     yAxis: {

@@ -1,6 +1,19 @@
-.container {
+/*.container {
   border: 1px solid #808080;
   -webkit-box-shadow: 2px 2px 2px 0px #808080;
   -moz-box-shadow: 2px 2px 2px 0px #808080;
   box-shadow: 2px 2px 2px 0px #808080;
+}*/
+
+/* Custom CSS */
+.graph {
+  border: 1px solid #808080;
+  -webkit-box-shadow: 2px 2px 2px 0px #808080;
+  -moz-box-shadow: 2px 2px 2px 0px #808080;
+  box-shadow: 2px 2px 2px 0px #808080;
+
+  min-width: 400px;
+  max-width: 800px;
+  height: 400px;
+  margin: 0 auto;
 }
