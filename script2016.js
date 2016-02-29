@@ -1,4 +1,4 @@
-$(function () {
+function graphData(data) {
   for (var i = 0; i < data.length; i++) {
     var graphid = "graph" + i+1;
     var div = document.createElement("div");
@@ -12,8 +12,6 @@ $(function () {
     var qData = [];
     for (var j = 0; j < data[i].responses.length; j++) {
         qCategories.push(data[i].responses[j].text);
-    }
-    for (var j = 0; j < data[i].responses.length; j++) {
         qData.push(data[i].responses[j].bar);
     }
     if (type == "Multiple Choice") {
@@ -113,4 +111,6 @@ $(function () {
       });
     }
   }
-});
+}
+
+$.getJSON("data/2015-2016.json", function(json) {graphData(json);});
