@@ -113,4 +113,10 @@ function graphData(data) {
   }
 }
 
-$.getJSON("data/2014-2015.json", function(json) {graphData(json);});
+var url = window.location.href.split("/");
+if (url[url.length - 1] === "results-2014-2015.html") {
+    $.getJSON("data/2014-2015.json", function(json) {graphData(json);});
+} 
+else if (url[url.length - 1] === "results-2015-2016.html") {
+    $.getJSON("data/2015-2016.json", function(json) {graphData(json);});
+}
