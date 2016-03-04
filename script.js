@@ -14,7 +14,7 @@ function graphData(data) {
         qCategories.push(data[i].responses[j].text);
         qData.push(data[i].responses[j].bar);
     }
-    if (type == "Multiple Choice") {
+    if (type == "Multiple Choice" || type == "Multiple Selection" || type == "Point Allocation") {
       $('#'+graphid).highcharts({
           chart: {
               type: 'column'
