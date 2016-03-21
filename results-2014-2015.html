@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
 
-  <title>ASG Analytics</title>
+  <title>ASG Survey Website</title>
   <meta name="description" content="Compiled data and graphed results of ASG Analytics' yearly surveys.">
   <meta name="author" content="ASG Services">
 
@@ -17,7 +17,6 @@
   <link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
   <!-- Custom CSS -->
   <link rel="stylesheet" href="style.css">
-    
 
 </head>
 
@@ -32,7 +31,7 @@
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
         </button>
-        <a class="navbar-brand" href="#">ASG Analytics</a>
+        <a class="navbar-brand" href="#">ASG Survey Website</a>
       </div>
 
       <!-- Collect the nav links, forms, and other content for toggling -->
@@ -44,8 +43,24 @@
     </div><!-- /.container-fluid -->
   </nav>
 
+  <div class="well">
+    <div class="container notice">
+      <b>Multiple choice</b> means students could select ONE option. <b>Multiple selection</b> means students could select ZERO TO ALL options <em>(unfortunately, 2014-2015 data does not provide metadata to distinguish between Multiple Choice and Multiple Selection, so all questions of those type are labeled Multiple Choice)</em>. In <b>point allocation</b>, 100 points are divided between choices. All 100 points must be assigned, and we have chosen to display the average points assigned by students. All other question types are relatively self-explanatory.
+      </br></br>
+      2014-2015 data does not contain metadata about which questions were prerequisites to others. Best guesses were made.
+      </br></br>
+      Some questions have been omitted from this public listing due to their sensitive nature.
+      </br></br>
+      All data on this page can be downloaded in JSON format (right-click and Save As..):
+      </br></br>
+      <a href="data/2014-2015.json" class="btn btn-success">
+        Download Data
+      </a>
+    </div>
+  </div>
+
   <div class="graphs"></div>
-  <div class="footer">© 2015 ASG Services</div>
+  <div class="footer"><a href="mailto:asg-services@u.northwestern.edu">© 2016 ASG Services</a></div>
 
   <!-- jQuery -->
   <script src="http://code.jquery.com/jquery-1.11.3.js"></script>
